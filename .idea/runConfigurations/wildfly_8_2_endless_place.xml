@@ -1,0 +1,52 @@
+<component name="ProjectRunConfigurationManager">
+  <configuration default="false" name="wildfly 8.2 endless.place" type="JBossConfiguration" factoryName="Remote" APPLICATION_SERVER_NAME="JBoss 8.2.0.Final" ALTERNATIVE_JRE_ENABLED="false" ALTERNATIVE_JRE_PATH="" show_console_on_std_out="true">
+    <option name="LOCAL" value="false" />
+    <option name="OPEN_IN_BROWSER_URL" value="http://localhost:8080/document.xhtml" />
+    <option name="UPDATE_ON_FRAME_DEACTIVATION" value="true" />
+    <option name="HOT_SWAP_CLASSES_ON_FRAME_DEACTIVATION" value="true" />
+    <option name="SHOW_DIALOG_ON_UPDATE" value="false" />
+    <option name="UPDATING_POLICY" value="hot-swap-classes" />
+    <deployment>
+      <artifact name="endless.place:war exploded (proxy)">
+        <settings DEPLOYMENT_METHOD="Staging" />
+      </artifact>
+    </deployment>
+    <server-settings>
+      <data>
+        <option name="managementPort" value="9990" />
+        <option name="password" value="Pa$$w0rd" />
+        <option name="serverGroup" value="" />
+        <option name="stagingRemotePath" value="" />
+        <option name="transportStagingTarget">
+          <TransportTarget>
+            <option name="id" value="3437e25d-9928-419b-a166-51740b867d84" />
+            <id>3437e25d-9928-419b-a166-51740b867d84</id>
+          </TransportTarget>
+        </option>
+        <option name="username" value="admin" />
+        <username>admin</username>
+        <password>Pa$$w0rd</password>
+        <management-port>9990</management-port>
+        <server-group />
+        <transport-target>
+          <TransportTarget>
+            <option name="id" value="3437e25d-9928-419b-a166-51740b867d84" />
+            <id>3437e25d-9928-419b-a166-51740b867d84</id>
+          </TransportTarget>
+        </transport-target>
+        <staging-path />
+      </data>
+    </server-settings>
+    <log_file path="C:/wildfly/standalone/log/server.log" checked="true" skipped="true" show_all="false" alias="standalone" />
+    <predefined_log_file id="JBoss" enabled="true" />
+    <RunnerSettings RunnerId="Debug">
+      <option name="DEBUG_PORT" value="53535" />
+      <option name="LOCAL" value="false" />
+    </RunnerSettings>
+    <method>
+      <option name="BuildArtifacts" enabled="true">
+        <artifact name="endless.place:war exploded (proxy)" />
+      </option>
+    </method>
+  </configuration>
+</component>
