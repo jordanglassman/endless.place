@@ -1,8 +1,0 @@
-<component name="ArtifactManager">
-  <artifact type="exploded-war" name="endless.place:war exploded (proxy)">
-    <output-path>$PROJECT_DIR$/target/endless.place-1.0-SNAPSHOT.war</output-path>
-    <root id="root">
-      <element id="artifact" artifact-name="endless.place:war exploded" />
-    </root>
-  </artifact>
-</component>
