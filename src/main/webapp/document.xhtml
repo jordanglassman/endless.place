@@ -10,14 +10,7 @@
                 xmlns:h="http://xmlns.jcp.org/jsf/html"
                 xmlns:f="http://xmlns.jcp.org/jsf/core"
                 xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
-                template="./documentTemplate.xhtml">
-
-    <ui:define name="debug-content">
-        <h:panelGroup>
-            <h:outputLabel id="document-display-id-label" styleClass="document-text" for="document-display-id"/>
-            <h:outputText id="document-display-id" styleClass="document-body" value="#{sessionScope.document.id}"/>
-        </h:panelGroup>
-    </ui:define>
+                template="documentTemplate.xhtml">
 
     <ui:define name="header-content">
         <h:panelGroup id="site-title" styleClass="site-title">
@@ -26,52 +19,77 @@
     </ui:define>
 
     <ui:define name="content-content">
-        <c:choose>
-            <c:when test="${empty sessionScope.document}">
-                <h:form id="document-edit-form" prependId="false">
-                    <h:panelGrid id="document-edit-form-table" columns="1">
-                        <f:facet name="header">
-                            <h:panelGroup>
-                                <h:inputText id="document-edit-title" styleClass="document-title"
-                                             value="#{documentViewBean.title}"/>
-                            </h:panelGroup>
-                        </f:facet>
+        <f:ajax execute="document-form" render="document-display">
+            <f:param name="testParam" value="lol" id="lol"/>
 
-                        <h:inputTextarea id="document-edit-body" styleClass="document-body" rows="10"
-                                         value="#{documentViewBean.body}"/>
+            <h:form id="document-edit-form" prependId="false">
 
-                        <f:facet name="footer">
-                            <h:panelGroup>
-                                <h:commandButton value="Post" id="document-edit-button" styleClass="document-button"
-                                                 action="#{documentViewBean.save}"/>
-                            </h:panelGroup>
-                        </f:facet>
-                    </h:panelGrid>
-                </h:form>
-            </c:when>
-            <c:otherwise>
-                <h:panelGrid id="document-display" columns="1">
+                <h:panelGrid id="document-form" columns="1" styleClass="table"
+                             rendered="#{empty sessionScope.document}">
                     <f:facet name="header">
-                        <h:panelGroup>
-                            <h:outputText id="document-display-title" styleClass="document-title" value="#{sessionScope.document.title}"/>
+                        <h:panelGroup styleClass="form-group">
+                            <h:inputText id="document-edit-title" styleClass="form-control"
+                                         value="#{documentViewBean.title}">
+                            </h:inputText>
                         </h:panelGroup>
                     </f:facet>
 
-                    <h:panelGroup >
-                        <h:outputText id="document-display-body" styleClass="document-body" value="#{sessionScope.document.body}"/>
+                    <h:panelGroup styleClass="form-group">
+                        <h:inputTextarea id="document-edit-body"
+                                         styleClass="form-control" rows="10"
+                                         value="#{documentViewBean.body}"/>
                     </h:panelGroup>
 
                     <f:facet name="footer">
                         <h:panelGroup>
+                            <h:commandButton value="Post" id="document-edit-button" action="#{documentViewBean.save}"/>
                         </h:panelGroup>
                     </f:facet>
                 </h:panelGrid>
-            </c:otherwise>
-        </c:choose>
 
+            </h:form>
+
+            <h:panelGrid id="document-display" columns="1" styleClass="table"
+                         rendered="#{!empty sessionScope.document}">
+                <f:facet name="header">
+                    <h:panelGroup>
+                        <h:outputText id="document-display-title" styleClass="document-title"
+                                      value="#{sessionScope.document.title}"/>
+                    </h:panelGroup>
+                </f:facet>
+
+                <h:panelGroup>
+                    <h:outputText id="document-display-body" styleClass="document-body"
+                                  value="#{sessionScope.document.body}"/>
+                </h:panelGroup>
+
+                <f:facet name="footer">
+                    <h:panelGroup>
+                        <h:commandButton value="New" id="document-new-button" action="#{documentViewBean.new}"/>
+                    </h:panelGroup>
+                </f:facet>
+            </h:panelGrid>
+        </f:ajax>
     </ui:define>
 
     <ui:define name="footer-content">
+    </ui:define>
+
+    <ui:define name="debug-content">
+        <h:panelGroup>
+            <c:if test="#{!empty sessionScope.document}">
+                <h:outputLabel id="document-debug-display-label" styleClass="document-text" for="document-debug-display"
+                               value="Current Document: "/>
+                <h:outputText id="document-debug-display" styleClass="document-body"
+                              value="#{sessionScope.document.description}" converter="javax.faces.Long"/>
+            </c:if>
+        </h:panelGroup>
+        <h:panelGroup>
+            <h:form>
+                <h:commandButton id="document-session-reset-debug" action="#{documentViewBean.invalidateSession}"
+                                 value="#invalidateSession()"/>
+            </h:form>
+        </h:panelGroup>
     </ui:define>
 
 </ui:composition>

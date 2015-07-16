@@ -1,6 +1,9 @@
 package com.jordanglassman.endless.place.entity;
 
+import org.apache.commons.lang3.builder.ReflectionToStringBuilder;
+
 import javax.persistence.*;
+import java.lang.reflect.Field;
 
 @Entity
 public class Document {
@@ -13,7 +16,13 @@ public class Document {
 	private String title;
 
 	@Column
+	private String url;
+
+	@Column
 	private String body;
+
+	@Transient
+	private String description;
 
 	public Long getId() {
 		return this.id;
@@ -37,5 +46,21 @@ public class Document {
 
 	public void setBody(String body) {
 		this.body = body;
+	}
+
+	public String getUrl() {
+		return url;
+	}
+
+	public void setUrl(String url) {
+		this.url = url;
+	}
+
+	public String getDescription() {
+		return (new ReflectionToStringBuilder(this) {
+			protected boolean accept(Field f) {
+				return super.accept(f) && !f.getName().equals("description");
+			}
+		}).toString();
 	}
 }
